@@ -54,7 +54,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="IBodyGenerator.cs" />
     <Compile Include="Simulation\SimulationInstance.cs" />
     <Compile Include="Simulation\SimulationResultSet.cs" />
     <Compile Include="Simulation\SimulationMemento.cs" />
