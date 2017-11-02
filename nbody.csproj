@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Solver\CalculationRuntimeOptimizer.cs" />
     <Compile Include="Simulation\SimulationInstance.cs" />
     <Compile Include="Simulation\SimulationResultSet.cs" />
     <Compile Include="Simulation\SimulationMemento.cs" />
@@ -78,7 +79,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NBodySolver.cs" />
+    <Compile Include="Solver\NBodySolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

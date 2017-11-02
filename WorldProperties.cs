@@ -22,6 +22,9 @@ namespace nbody
         // Size of the smallest QuadTree box allowed
         public static double MinimumBoundingBoxWidth { get; set; }
 
+        // Maximum allowed velocity for a body
+        public static double MaxVelocity { get; set; }
+
     }
 
 }

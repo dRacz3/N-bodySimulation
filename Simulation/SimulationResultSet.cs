@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,38 +9,47 @@ namespace nbody
 {
     class SimulationResultSet
     {
-        SimulationMemento[] mementoList;
-        int currentDisplayIndex = 0;
-        int lastAddedIndex = 0;
-        int maxFrames = 0;
+        Queue<SimulationMemento> mementoQueue;
+        public int currentDisplayIndex { get; set; }
 
-        public SimulationResultSet(int numberOfFrames)
+        object MementoLock = new object();
+
+
+        public SimulationResultSet()
         {
-            maxFrames = numberOfFrames;
-            mementoList = new SimulationMemento[numberOfFrames];
+            currentDisplayIndex = 0;
+            mementoQueue = new Queue<SimulationMemento>();
         }
 
 
         public SimulationMemento GetNextMemento()
         {
-            SimulationMemento tmp;
-
-            if (currentDisplayIndex < maxFrames || mementoList[currentDisplayIndex + 1] == null)
+            if (mementoQueue.Count == 1)
             {
-                tmp = mementoList[currentDisplayIndex];
+                lock (MementoLock)
+                {
+                    return mementoQueue.Peek();
+                }
+            }
+            else if(mementoQueue.Count != 0)
+            {
+                lock (MementoLock)
+                {
+                    return mementoQueue.Dequeue();
+                }
             }
             else
             {
-                tmp = mementoList[maxFrames];
+                return new SimulationMemento();
             }
-            currentDisplayIndex++;
-            return tmp;
         }
 
         public void AddMemento(SimulationMemento memento)
         {
-            mementoList[lastAddedIndex] = memento;
-            lastAddedIndex++;
+            lock(MementoLock)
+            {
+                mementoQueue.Enqueue(memento);
+            }
         }
 
     }

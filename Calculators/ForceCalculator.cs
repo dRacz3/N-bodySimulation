@@ -15,7 +15,8 @@ namespace nbody
         static public Force CalculateForce(Body b1, Body b2)
         {
             double distance = CalculatorUtils.CalculateDistance(b1.Position, b2.Position);
-            if (distance == 0 || distance < (b1.Size + b2.Size))
+            Body bigger = b1.Size > b2.Size ? b1 : b2;
+            if (distance == 0 || distance <= (bigger.Size))
             {
                 return new Force(0, 0);
             }

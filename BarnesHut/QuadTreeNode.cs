@@ -42,7 +42,7 @@ namespace nbody
         }
 
         // Property containing the position information of the Node box
-        public BoundingBox boundingBox { get; set; }
+        public BoundingBox BoundingBox { get; set; }
 
         // Simple representation of the node for calculations to hide cluster below
         public Centroid CenterOfMass { get; set; }
@@ -98,7 +98,7 @@ namespace nbody
         // Pass a body to a subtree. Creating the subtrees if they do not exist,
         public void AddToSubTree(Body body)
         {
-            double subtreeWidth = Math.Abs(boundingBox.Xmax - boundingBox.Xmin);
+            double subtreeWidth = Math.Abs(BoundingBox.Xmax - BoundingBox.Xmin);
             double MinimumWidth = WorldProperties.MinimumBoundingBoxWidth;
             // Don't create subtrees if it violates the width limit.
             if (subtreeWidth < MinimumWidth)
@@ -111,7 +111,7 @@ namespace nbody
             {
                 subNodes = new QuadTreeNode[4];
                 // Create boxes & assign them to the new nodes
-                BoundingBox[] subBoxes = boundingBox.Split(boundingBox);
+                BoundingBox[] subBoxes = BoundingBox.Split(BoundingBox);
                 for (int i = 0; i < 4; i++)
                 {
                     subNodes[i] = new QuadTreeNode(subBoxes[i]);
@@ -121,7 +121,7 @@ namespace nbody
             {
                 foreach (QuadTreeNode subnode in subNodes)
                 {
-                    if (subnode.boundingBox.isInside(body.Position))
+                    if (subnode.BoundingBox.isInside(body.Position))
                     {
                         subnode.AddBody(body);
                     }
@@ -136,8 +136,8 @@ namespace nbody
             double distance = CalculatorUtils.CalculateDistance(
                                                 body.Position,
                                                 new System.Windows.Point(CenterOfMass.X, CenterOfMass.Y));
-            double Width = boundingBox.Xmax - boundingBox.Xmin;
-            double Height = boundingBox.Ymax - boundingBox.Ymin;
+            double Width = BoundingBox.Xmax - BoundingBox.Xmin;
+            double Height = BoundingBox.Ymax - BoundingBox.Ymin;
             // There's only one body in the node      || s/d < omega -> the Node is far away enough to treat it as a single object
             if ((BodyCount == 1 && body != firstBody) || ((Width * Height) / (distance * distance) < WorldProperties.Tolerance * WorldProperties.Tolerance))
             {
@@ -164,7 +164,7 @@ namespace nbody
         public QuadTreeNode()
         {
             CenterOfMass = new Centroid(0, 0, 0);
-            boundingBox = new BoundingBox(0, 0, 0, 0);
+            BoundingBox = new BoundingBox(0, 0, 0, 0);
 
         }
 
@@ -172,7 +172,7 @@ namespace nbody
         public QuadTreeNode(BoundingBox box)
         {
             CenterOfMass = new Centroid(0, 0, 0);
-            boundingBox = box;
+            BoundingBox = box;
         }
 
     }

@@ -7,24 +7,45 @@
         mc:Ignorable="d"
         Title="N-Test szimuláció, Rácz Dániel" Height="700" Width="1100" ResizeMode="NoResize">
     <Grid >
-        <Border HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="3" Margin="0,0,0,10">
-            <StackPanel Grid.Column="0" Grid.Row="0" Height="auto" Width="120" HorizontalAlignment="Center">
-                <Button x:Name="btn_randomize" Content="Reset" Grid.Column ="0" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_randomize_Click" Width="75" />
-                <Button x:Name="btn_start" Grid.Column ="0" Content="Start"  HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_start_Click"  Width="75"/>
-                <Button x:Name="btn_stop" Grid.Column ="0" Content="Stop" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Click="btn_stop_Click" IsEnabled="False"/>
-                <Label x:Name="label_bodycount" Grid.Column ="0" Content="Body count:" HorizontalAlignment="Center" VerticalAlignment="Top" Height="27"/>
-                <TextBox x:Name="txtbox_bodycount" Grid.Column ="0" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="25" VerticalAlignment="Top" Width="73" PreviewTextInput="CheckIfOnlyNumberWasEntered" IsEnabled="False" />
-                <Label Content="Gravity:" HorizontalAlignment="Center" Grid.Column ="0"  VerticalAlignment="Top" Width="73"/>
-                <TextBox x:Name="txtbox_gravity" HorizontalAlignment="Center" Height="23" Grid.Column ="0" TextWrapping="Wrap" Text="9,81" VerticalAlignment="Top" Width="73" PreviewTextInput="CheckIfOnlyNumberWasEntered" IsEnabled="False"/>
-                <Button x:Name="btn_update" Content="Update" Grid.Column ="0" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="75" Click="Button_Click" IsEnabled="False"/>
-                <Slider x:Name="sldr_tolerance" HorizontalAlignment="Left" Grid.Column ="0" VerticalAlignment="Top" Height="13" Width="110" ValueChanged="Slider_ValueChanged" Maximum="5" Value="0.5" LargeChange="0.25"/>
-                <Label x:Name="label_Tolerance" Content="Tolerance" Grid.Column ="0" VerticalAlignment="Top" Margin="0,0,22,0"/>
-                <CheckBox x:Name="chckbx_Grid" Content="Enable Grid" HorizontalAlignment="Left" Grid.Column ="0" VerticalAlignment="Top"/>
-                <CheckBox x:Name="chckbx_Force" Content="Enable Force" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
-            </StackPanel>
+        <Border HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="3" Margin="0,0,0,10" Width="235">
+            <StackPanel Grid.Column="0" Grid.Row="0" Height="auto" Width="120" HorizontalAlignment="Center"/>
         </Border>
         <Grid Grid.Column="1">
-            <Canvas x:Name="MainCanvas" Width="auto" Height="auto" Background="Black" Margin="130,10,10,10"/>
+            <Canvas x:Name="MainCanvas" Width="auto" Height="auto" Background="Black" Margin="245,10,10,10"/>
+            <Grid HorizontalAlignment="Left" Height="205" Margin="10,10,0,0" VerticalAlignment="Top" Width="220">
+                <Button x:Name="btn_start" Grid.Column ="0" Content="Start"  HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Start_Click"  Width="76" Margin="10,64,134,0"/>
+                <Button x:Name="btn_update" Content="Update" Grid.Column ="0" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="74" Click="Button_Click" IsEnabled="False" Margin="100,64,46,0"/>
+                <Label x:Name="label_bodycount" Grid.Column ="0" Content="Body count:" HorizontalAlignment="Center" VerticalAlignment="Top" Height="27" Margin="13,89,134,0"/>
+                <TextBox x:Name="txtbox_bodycount" Grid.Column ="0" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="72" PreviewTextInput="CheckIfOnlyNumberWasEntered" IsEnabled="False" Margin="100,89,48,0" />
+                <Label Content="Gravity:" HorizontalAlignment="Center" Grid.Column ="0"  VerticalAlignment="Top" Width="74" Margin="10,113,136,0"/>
+                <TextBox x:Name="txtbox_gravity" HorizontalAlignment="Center" Height="23" Grid.Column ="0" TextWrapping="Wrap" Text="9,81" VerticalAlignment="Top" Width="74" PreviewTextInput="CheckIfOnlyNumberWasEntered" IsEnabled="False" Margin="100,117,46,0"/>
+                <Slider x:Name="sldr_tolerance" HorizontalAlignment="Left" Grid.Column ="0" VerticalAlignment="Top" Height="25" Width="110" ValueChanged="Slider_ValueChanged" Maximum="5" Value="0.5" LargeChange="0.25" Margin="10,170,0,0"/>
+                <Label x:Name="label_Tolerance" Content="Tolerance" Grid.Column ="0" VerticalAlignment="Top" Margin="10,139,112,0"/>
+                <Label Content="Simulation Control&#xD;&#xA;" HorizontalAlignment="Left" Margin="13,8,0,0" VerticalAlignment="Top" Width="197" Height="31"/>
+                <Button Content="Display help" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="75" Click="HelpButton_Click"/>
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="80" Margin="10,220,0,0" VerticalAlignment="Top" Width="220">
+                <CheckBox x:Name="chckbx_Force" Content="Enable Force Visualisation"  VerticalAlignment="Top" Margin="10,35,10,0" IsEnabled="False" />
+                <CheckBox x:Name="chckbx_Grid" Content="Enable QuadTree Visualization" Grid.Column ="0" VerticalAlignment="Top" Margin="10,55,10,0" IsEnabled="False" />
+                <Label Content="Visualisations" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="356" Margin="10,305,0,0" VerticalAlignment="Top" Width="220">
+                <Label Content="Simulation Time settings" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button x:Name="btn_SwitchToFt" Content="Swtich to fixed time" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="130" Click="Button_Swtich_To_FixedTime" IsEnabled="False"/>
+                <Button x:Name="btn_SwtichToRt" Content="Switch to realtime " HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="200" Click="Button_Switch_To_Realtime" IsEnabled="False" />
+                <TextBox x:Name="txtbox_SimTime" HorizontalAlignment="Left" Height="23" Margin="111,81,0,0" TextWrapping="Wrap" Text="30" VerticalAlignment="Top" Width="100" />
+                <Label Content="Sim Time [s]:" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_CalcTimeInfo" Content="Time to calculate the entire time:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_SimTime" Content="No data" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top"/>
+                <Label Content="Current simulation mode is:" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0.385"/>
+                <Label x:Name="label_SimMode" Content="Realtime mode" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.444,0.538"/>
+                <Label Content="Simulation has been running for:" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_TotalSimTime" Content="No data" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="fixMode_Selector" HorizontalAlignment="Left" Margin="145,31,0,0" VerticalAlignment="Top" Width="65" SelectedIndex="0">
+                    <ComboBoxItem Content="Task"/>
+                    <ComboBoxItem Content="Parallel"/>
+                </ComboBox>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
