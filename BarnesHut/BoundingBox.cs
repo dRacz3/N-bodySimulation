@@ -1,25 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace nbody
 {
-
-    class BoundingBox
+    internal class BoundingBox
     {
-        // Read only properties
-        public double Xmax { get; }
-        public double Xmin { get; }
-        public double Ymax { get; }
-        public double Ymin { get; }
-
-        public String ID { get; set; }
-
         // IDs are based on this counter
-        static int Counter = 0;
+        private static int Counter;
 
         // Constructor that initializez the coordinates
         public BoundingBox(double xmax, double xmin, double ymax, double ymin)
@@ -32,6 +18,15 @@ namespace nbody
             Counter++;
         }
 
+        // Read only properties
+        public double Xmax { get; }
+
+        public double Xmin { get; }
+        public double Ymax { get; }
+        public double Ymin { get; }
+
+        public string ID { get; set; }
+
         // Check if the position is between the Boundaries specified in the properties
         public bool isInside(Position position)
         {
@@ -39,9 +34,7 @@ namespace nbody
                 position.X <= Xmax &&
                 position.Y > Ymin &&
                 position.Y <= Ymax)
-            {
                 return true;
-            }
             return false;
         }
 
@@ -51,9 +44,7 @@ namespace nbody
                 position.X <= Xmax &&
                 position.Y > Ymin &&
                 position.Y <= Ymax)
-            {
                 return true;
-            }
             return false;
         }
 
@@ -87,6 +78,5 @@ namespace nbody
 
             return splittedBoxes;
         }
-
     }
 }

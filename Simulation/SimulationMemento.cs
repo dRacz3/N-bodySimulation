@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace nbody
 {
-    class SimulationMemento
+    internal class SimulationMemento
     {
-        public int BodyCount { get; }
-
         public SimulationMemento()
         {
             BodyList = new List<Body>();
@@ -21,10 +15,7 @@ namespace nbody
 
         public void AddBody(Body body)
         {
-                BodyList.Add(body);
+            BodyList.Add(body);
         }
-
-
     }
-
 }

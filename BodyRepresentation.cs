@@ -81,13 +81,12 @@ namespace nbody
             Acceleration = new Acceleration(0, 0);
             ActingForce = new Force(0, 0);
             ForceT1m = new Force(0, 0);
-            ID = ++bodyCounter;
+            ++bodyCounter;
             SolidColor = Brushes.White;
         }
 
         static int bodyCounter;
-        private int ID;
-        
+
         public Body Copy()
         {
             Body tmp = new Body();

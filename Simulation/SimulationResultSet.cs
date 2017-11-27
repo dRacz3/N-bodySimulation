@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace nbody
 {
-    class SimulationResultSet
+    internal class SimulationResultSet
     {
-        Queue<SimulationMemento> mementoQueue;
-        public int currentDisplayIndex { get; set; }
-
-        object MementoLock = new object();
+        private readonly object MementoLock = new object();
+        private readonly Queue<SimulationMemento> mementoQueue;
 
 
         public SimulationResultSet()
@@ -21,36 +14,30 @@ namespace nbody
             mementoQueue = new Queue<SimulationMemento>();
         }
 
+        public int currentDisplayIndex { get; set; }
+
 
         public SimulationMemento GetNextMemento()
         {
             if (mementoQueue.Count == 1)
-            {
                 lock (MementoLock)
                 {
                     return mementoQueue.Peek();
                 }
-            }
-            else if(mementoQueue.Count != 0)
-            {
+            if (mementoQueue.Count != 0)
                 lock (MementoLock)
                 {
                     return mementoQueue.Dequeue();
                 }
-            }
-            else
-            {
-                return new SimulationMemento();
-            }
+            return new SimulationMemento();
         }
 
         public void AddMemento(SimulationMemento memento)
         {
-            lock(MementoLock)
+            lock (MementoLock)
             {
                 mementoQueue.Enqueue(memento);
             }
         }
-
     }
 }

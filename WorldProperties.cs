@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace nbody
+﻿namespace nbody
 {
     /* This is a static class Containing Simulation properties shared between Parts of the system*/
-    class WorldProperties
+    internal class WorldProperties
     {
         // Gravity
         public static double G { set; get; }
@@ -24,7 +18,5 @@ namespace nbody
 
         // Maximum allowed velocity for a body
         public static double MaxVelocity { get; set; }
-
     }
-
 }

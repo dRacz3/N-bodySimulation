@@ -1,35 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace nbody
 {
-    class SimulationInstance
+    internal class SimulationInstance
     {
-        NBodySolver _solver;
-        double dt = 10; // ms;
-        int _bodyCount;
-        SimulationResultSet resultSet;
-        Stopwatch sw;
-        int frameCount = 0;
-        Object mementoLock = new object();
+        private int _bodyCount;
+        private readonly NBodySolver _solver;
+        private double dt = 10; // ms;
+        private readonly int frameCount;
+        private object mementoLock = new object();
+        private readonly SimulationResultSet resultSet;
+        private Stopwatch sw;
 
         public SimulationInstance(double time, double timestep, int bodyCount, CalculationMode mode)
-        {  
+        {
             dt = timestep;
             _bodyCount = bodyCount;
             // TODO : update calculation mode to be changeable
-            _solver = new NBodySolver(WorldProperties.CanvasWidth, WorldProperties.CanvasHeight, bodyCount, timestep, mode);
+            _solver = new NBodySolver(WorldProperties.CanvasWidth, WorldProperties.CanvasHeight, bodyCount, timestep,
+                mode);
             frameCount = Convert.ToInt32(time * 1000 / timestep);
             resultSet = new SimulationResultSet();
         }
 
         public void ResetSimulation()
         {
-
         }
 
         public void StartSimulation()
@@ -41,28 +37,22 @@ namespace nbody
             {
                 DoOneIteration();
                 count++;
-  //              Trace.WriteLine("Doing iteration..." + count + "frameCount is :" + frameCount);
             }
             sw.Stop();
-    //        Console.WriteLine("Elapsed={0}", sw.Elapsed);
         }
 
         public void StopSimulation()
         {
-
         }
 
         private void DoOneIteration()
         {
             _solver.CalculateNextPositions();
- //           Trace.WriteLine("Adding memento");
             resultSet.AddMemento(_solver.GetCurrentMemento());
-
         }
 
         public SimulationMemento GetNextFrame()
         {
- //           Trace.WriteLine("Giving back iteration :" + resultSet.currentDisplayIndex);
             resultSet.currentDisplayIndex++;
             return resultSet.GetNextMemento();
         }

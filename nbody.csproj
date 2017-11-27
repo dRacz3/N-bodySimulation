@@ -71,7 +71,6 @@
     <Compile Include="BarnesHut\QuadTreeNode.cs" />
     <Compile Include="BodyRepresentation.cs" />
     <Compile Include="Calculators\CalculatorUtils.cs" />
-    <Compile Include="Calculators\CollisionCalculator.cs" />
     <Compile Include="Calculators\ForceCalculator.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
